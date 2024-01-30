@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     margin: 16,
-    height: 150,
+    height: 52,
     borderRadius: 8,
     elevation: 4,
     backgroundColor: "white",
@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     fontSize: 14,
     fontWeight: "bold",
+    
   },
   buttonPressed: {
     opacity: 0.5,
