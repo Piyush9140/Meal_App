@@ -6,32 +6,39 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { MEALS } from "../data/dummy-data";
 import MealD from "../components/MealD";
 import Subtitle from "../components/MealDetails/Subtitle";
 import List from "../components/MealDetails/List";
 import IconButton from "../components/IconButton";
+import { FavoriteContext } from "../store/context/FavContext";
 
 function Detail({ route, navigation }) {
+  const favoriteMealCtx = useContext(FavoriteContext);
   const mealid = route.params.mealID;
   const selectedMeal = MEALS.find((meal) => meal.id == mealid);
-  function headerButtonPressHandler() {
-    console.log("pressed");
+  const mealIsFav = favoriteMealCtx.ids.includes(mealid);
+  function changeFavHandler() {
+    if (mealIsFav) {
+      favoriteMealCtx.removeFav(mealid);
+    } else {
+      favoriteMealCtx.addFav(mealid);
+    }
   }
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return (
           <IconButton
-            name="star"
+            name={mealIsFav ? "star" : "star-outline"}
             color="white"
-            onPress={headerButtonPressHandler}
+            onPress={changeFavHandler}
           ></IconButton>
         );
       },
     });
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavHandler]);
   return (
     <ScrollView style={styles.rootContainer}>
       <View>

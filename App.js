@@ -8,6 +8,7 @@ import Detail from "./screens/Detail";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FavScreen from "./screens/FavScreen";
 import {Ionicons } from '@expo/vector-icons'
+import FavContextProvider from "./store/context/FavContext";
 
 const stack = createNativeStackNavigator();
 const drawer = createDrawerNavigator();
@@ -44,6 +45,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
+      <FavContextProvider>
       <NavigationContainer>
         <stack.Navigator
           screenOptions={{
@@ -65,6 +67,7 @@ export default function App() {
           <stack.Screen name="Mealdetailscreen" component={Detail} options={{title:'About The Screen'}}/>
         </stack.Navigator>
       </NavigationContainer>
+      </FavContextProvider>
     </>
   );
 }
